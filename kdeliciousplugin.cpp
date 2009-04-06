@@ -24,20 +24,14 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	if( parent )
 		m_parent = dynamic_cast<KParts::ReadOnlyPart*>(parent);
 
-	m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::LocalWallet(), 0 );
-	if( !m_wallet->setFolder( "kdelicious" ) )
-	{
-		m_wallet->createFolder( "kdelicious" );
-		m_wallet->setFolder( "kdelicious" );
-	}
-
-	KActionMenu *menu = new KActionMenu( KIcon("configure"), i18n("del.icio.us Settings"),
+	KActionMenu *menu = new KActionMenu( KIcon("bookmarks-organize.png"), i18n("del.icio.us Settings"),
 		actionCollection() );
 	actionCollection()->addAction( "kdelicious menu", menu );
 	menu->setDelayed( false );
 
 	KAction *kaction;
 	kaction = actionCollection()->addAction( "delicioustag" );
+	kaction->setIcon( KIcon("bookmarks-organize.png") );
 	kaction->setText( i18n("&Tag this site...") );
 	menu->addAction( kaction );
 	connect( kaction, SIGNAL(triggered(bool)),

@@ -13,4 +13,4 @@ X-KDE-PluginInfo-EnabledByDefault=false
 X-KDE-ParentApp=konqueror
 Name=KDelicious
 Comment=Provides easy access to del.icio.us features within Konqueror
-Icon=configure
+Icon=bookmarks-organize.png
