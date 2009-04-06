@@ -5,10 +5,12 @@
 
 class KActionMenu;
 class KConfig;
+
 namespace KParts
 {
 	class ReadOnlyPart;
 }
+
 namespace KWallet
 {
 	class Wallet;
@@ -24,12 +26,12 @@ class KDeliciousPlugin
 
 	private Q_SLOTS:
 		void setAccount();
+		void tagPage();
 
 	private:
-		KActionMenu *m_menu;
 		KParts::ReadOnlyPart *m_parent;
 		KWallet::Wallet *m_wallet;
-		KConfig *m_menu;
+		KConfig *m_config;
 
 };
 

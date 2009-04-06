@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+0f9ccf3e2067f77e7748aa8a88d13c94 CMakeFiles/kdelicious_automoc
+0eb66867b19cc62b616f2a2be246f990 CMakeFiles/uninstall
+0f1ba33f0f03ca9e0f69abad39b95e8f ui_newbookmarkwidget.h

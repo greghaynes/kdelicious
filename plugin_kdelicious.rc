@@ -1,0 +1,8 @@
+<!DOCTYPE kpartgui>
+<gui name="kdelicious" library="kdelicious" version="1">
+<MenuBar>
+ <Menu name="tools"><text>&amp;Tools</text>
+  <Action name="kdelicious menu"/>
+ </Menu>
+</MenuBar>
+</gui>

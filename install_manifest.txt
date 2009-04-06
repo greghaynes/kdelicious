@@ -1,0 +1,3 @@
+/usr/lib/kde4/kdelicious.so
+/usr/share/apps/khtml/kpartplugins/plugin_kdelicious.rc
+/usr/share/apps/khtml/kpartplugins/plugin_kdelicious.desktop
