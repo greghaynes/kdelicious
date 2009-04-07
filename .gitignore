@@ -7,4 +7,5 @@ lib
 *.files
 moc*
 Makefile
+*_automoc*
 

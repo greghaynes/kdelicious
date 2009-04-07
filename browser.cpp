@@ -30,11 +30,23 @@ QHttp *Browser::http() const
 BookmarkRequest *Browser::recentBookmarks()
 {
 	BookmarkRequest *req = new BookmarkRequest(
-		"v1/posts/recent",
+		"v1/posts/recent?",
 		this );
 	enqueueRequest( req );
 	return req;
 }
+
+PostRequest *Browser::postBookmark( const QString &name,
+	const QString &url,
+	const QString &description,
+	QList<QString> tags )
+{
+	qDebug() << name << url << description;
+	PostRequest *req = new PostRequest( "v1/posts/add?", name, url, description, tags, this );
+	enqueueRequest( req );
+	return req;
+}
+
 
 void Browser::requestFinished()
 {

@@ -21,3 +21,19 @@ void CreateBookmarkDialog::setUrl( const QString& url )
 {
 	ui->urlLineEdit->setText( url );
 }
+
+QString CreateBookmarkDialog::getDescription() const {
+	return ui->descriptionTextEdit->toPlainText();
+}
+
+QString CreateBookmarkDialog::getUrl() const {
+	return ui->urlLineEdit->text();
+}
+
+QString CreateBookmarkDialog::getTags() const {
+	return ui->tagsLineEdit->text();
+}
+
+QString CreateBookmarkDialog::getTitle() const {
+	return ui->titleLineEdit->text();
+}

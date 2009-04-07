@@ -12,13 +12,15 @@ Request::Request( const QString &path, QObject *parent )
 	: QObject( parent )
 	, m_path( path )
 	, m_isFinished( false )
+	, buffer( new QBuffer( this ) )
 {
-	connect( &buffer, SIGNAL(readyRead()),
+	connect( buffer, SIGNAL(readyRead()),
 		this, SLOT(slotReadyRead()) );
 }
 
 Request::~Request()
 {
+	delete buffer;
 }
 
 const QString &Request::path() const
@@ -38,7 +40,7 @@ bool Request::isFinished() const
 
 void Request::run( QHttp *qhttp )
 {
-	qhttp->get( path(), &buffer );
+	qhttp->get( path(), buffer );
 }
 
 const QVariant &Request::responseData() const
@@ -48,7 +50,7 @@ const QVariant &Request::responseData() const
 
 void Request::slotReadyRead()
 {
-	QXmlInputSource source( &buffer );
+	QXmlInputSource source( buffer );
 	QXmlSimpleReader reader;
 	reader.setContentHandler( this );
 	reader.parse( source );

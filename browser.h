@@ -3,6 +3,7 @@
 
 #include "request.h"
 #include "bookmarkrequest.h"
+#include "postrequest.h"
 
 #include <QObject>
 #include <QString>
@@ -36,6 +37,10 @@ class Browser
 
 		QHttp *http() const;
 		BookmarkRequest *recentBookmarks();
+		PostRequest *postBookmark( const QString &name,
+			const QString &url,
+			const QString &description,
+			QList<QString> tags );
 
 	private Q_SLOTS:
 		void requestFinished();

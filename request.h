@@ -53,7 +53,7 @@ class Request
 
 	private:
 		QString m_path;
-		QBuffer buffer;
+		QBuffer *buffer;
 		bool m_isFinished;
 
 };

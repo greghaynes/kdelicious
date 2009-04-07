@@ -17,6 +17,10 @@ class CreateBookmarkDialog
 
 		void setTitle( const QString &title );
 		void setUrl( const QString &url );
+		QString getUrl() const;
+		QString getTitle() const;
+		QString getDescription() const;
+		QString getTags() const;
 
 	private:
 

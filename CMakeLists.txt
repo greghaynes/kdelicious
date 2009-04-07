@@ -11,7 +11,8 @@ set(kdelicious_SRCS
   request.cpp
   browser.cpp
   bookmark.cpp
-  bookmarkrequest.cpp)
+  bookmarkrequest.cpp
+  postrequest.cpp)
 
 set(kdelicious_UI
   newbookmarkwidget.ui)

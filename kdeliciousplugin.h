@@ -1,6 +1,8 @@
 #ifndef KDELICIOUSPLUGIN_H
 #define KDELICIOUSPLUGIN_H
 
+#include "browser.h"
+
 #include <kparts/plugin.h>
 
 class KActionMenu;
@@ -21,13 +23,18 @@ class KDeliciousPlugin
 		KDeliciousPlugin(QObject* parent = 0, const QVariantList &args = QVariantList());
 
 	private Q_SLOTS:
+		void setAccount( const QString &prompt );
 		void setAccount();
+		void authenticationRequired( QString hostname,
+			quint16 port,
+			QAuthenticator *authenticator );
 		void tagPage();
 
 	private:
 		KHTMLPart *m_parent;
 		KWallet::Wallet *m_wallet;
 		KConfig *m_config;
+		QtLicious::Browser *m_browser;
 
 };
 
