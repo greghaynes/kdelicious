@@ -15,7 +15,11 @@ class CreateBookmarkDialog
 	public:
 		CreateBookmarkDialog( QWidget *parent = 0 );
 
+		void setTitle( const QString &title );
+		void setUrl( const QString &url );
+
 	private:
+
 		Ui::NewBookmarkWidget *ui;
 
 };

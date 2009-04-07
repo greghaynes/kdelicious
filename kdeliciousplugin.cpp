@@ -11,6 +11,8 @@
 #include <KWallet/Wallet>
 #include <KConfig>
 #include <KAboutData>
+#include <KHTMLPart>
+#include <DOM/HTMLDocument>
 
 static const KAboutData aboutData("kdelicious", 0, ki18n("del.icio.us plugin"), "1.0");
 K_PLUGIN_FACTORY( KDeliciousPluginFactory, registerPlugin< KDeliciousPlugin >(); )
@@ -22,7 +24,7 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	setComponentData( KDeliciousPluginFactory::componentData() );
 
 	if( parent )
-		m_parent = dynamic_cast<KParts::ReadOnlyPart*>(parent);
+		m_parent = dynamic_cast<KHTMLPart*>(parent);
 
 	KActionMenu *menu = new KActionMenu( KIcon("bookmarks-organize.png"), i18n("del.icio.us Settings"),
 		actionCollection() );
@@ -43,12 +45,17 @@ void KDeliciousPlugin::setAccount()
 {
 	KPasswordDialog dialog( 0,
 		KPasswordDialog::ShowUsernameLine );
-	dialog.exec();
+	if( dialog.exec() )
+	{
+		
+	}
 }
 
 void KDeliciousPlugin::tagPage()
 {
 	CreateBookmarkDialog dialog( 0 );
+	dialog.setTitle( m_parent->htmlDocument().title().string() );
+	dialog.setUrl( m_parent->url().url() );
 	dialog.exec();
 }
 

@@ -5,11 +5,7 @@
 
 class KActionMenu;
 class KConfig;
-
-namespace KParts
-{
-	class ReadOnlyPart;
-}
+class KHTMLPart;
 
 namespace KWallet
 {
@@ -29,7 +25,7 @@ class KDeliciousPlugin
 		void tagPage();
 
 	private:
-		KParts::ReadOnlyPart *m_parent;
+		KHTMLPart *m_parent;
 		KWallet::Wallet *m_wallet;
 		KConfig *m_config;
 

@@ -3,4 +3,8 @@ CMakeCache.txt
 ui_*
 *.moc
 CMakeTmp
+lib
+*.files
+moc*
+Makefile
 

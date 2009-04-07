@@ -2,3 +2,4 @@
 -D_BSD_SOURCE
 */
 #include "moc_kdeliciousplugin.cpp"
+#include "moc_browser.cpp"
