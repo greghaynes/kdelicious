@@ -10,7 +10,7 @@
 #include <QQueue>
 #include <QUrl>
 
-static const char *delicious_api_host = "https://api.del.icio.us";
+static const char *delicious_api_host = "api.del.icio.us";
 
 namespace QtLicious
 {

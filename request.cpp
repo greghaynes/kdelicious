@@ -16,6 +16,7 @@ Request::Request( const QUrl &path, QObject *parent )
 	, buffer( new QBuffer( this ) )
 	, m_isFinished( false )
 {
+	buffer->open(QBuffer::ReadWrite);
 	connect( buffer, SIGNAL(readyRead()),
 		this, SLOT(slotReadyRead()) );
 }
@@ -43,7 +44,7 @@ bool Request::isFinished() const
 void Request::run( QHttp *qhttp )
 {
 	qDebug() << "Running" << path().toEncoded();
-	qhttp->get( path().toEncoded(), buffer );
+	qhttp->get( path().encodedPath(), buffer );
 }
 
 const QVariant &Request::responseData() const

@@ -29,6 +29,8 @@ class KDeliciousPlugin
 			quint16 port,
 			QAuthenticator *authenticator );
 		void tagPage();
+		void requestStarted( int id );
+		void requestFinished( int id, bool error );
 
 	private:
 		KHTMLPart *m_parent;

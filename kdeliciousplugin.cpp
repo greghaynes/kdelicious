@@ -48,9 +48,13 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	connect( kaction, SIGNAL(triggered(bool)),
 		this, SLOT(setAccount()) );
 
+	m_browser->http()->ignoreSslErrors();
 	connect( m_browser->http(), SIGNAL(authenticationRequired(QString,quint16,QAuthenticator*)),
 		this, SLOT(authenticationRequired(QString,quint16,QAuthenticator*)) );
-	
+	connect( m_browser->http(), SIGNAL(requestStarted(int)),
+		this, SLOT(requestStarted(int)) );
+	connect( m_browser->http(), SIGNAL(requestFinished(int,bool)),
+		this, SLOT(requestFinished(int,bool)) );
 
 }
 
@@ -99,3 +103,12 @@ void KDeliciousPlugin::tagPage()
 	}
 }
 
+void KDeliciousPlugin::requestStarted( int id )
+{
+	qDebug() << "Request started";
+}
+
+void KDeliciousPlugin::requestFinished( int id, bool error )
+{
+	qDebug() << "Request finished.  Error" << m_browser->http()->errorString();
+}

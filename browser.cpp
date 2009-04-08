@@ -9,15 +9,16 @@ namespace QtLicious
 Browser::Browser( QObject *parent )
 	: QObject( parent )
 	, can_req( true )
-	, m_http( new QHttp( delicious_api_host, 0,  this ) )
+	, m_http( new QHttp( this ) )
 {
+	m_http->setHost( delicious_api_host, QHttp::ConnectionModeHttps, 443 );
 }
 
 Browser::Browser( const QString &apiUrl,
 	QObject *parent )
 	: QObject( parent )
 	, can_req( true )
-	, m_http( new QHttp( apiUrl, 0, this ) )
+	, m_http( new QHttp( apiUrl, 443, this ) )
 {
 	delete m_http;
 }
@@ -43,7 +44,7 @@ PostRequest *Browser::postBookmark( const QString &name,
 {
 	qDebug() << name << url << description;
 	PostRequest *req = new PostRequest(
-		QUrl( "https://api.del.icio.us/v1/posts/add" ),
+		QUrl( "/v1/posts/add" ),
 		name,
 	   	url,
 		description,
