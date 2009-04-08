@@ -54,11 +54,35 @@ const QVariant &Request::responseData() const
 
 void Request::slotReadyRead()
 {
-	QXmlInputSource source( buffer );
+	QXmlInputSource source;
+	source.setData( buffer->data() );
 	QXmlSimpleReader reader;
 	reader.setContentHandler( this );
-	reader.parse( source );
+	reader.setErrorHandler( this );
+	if( !reader.parse( source ) )
+		qDebug() << "Parsing failed.";
 	emit( finished() );
+}
+
+bool Request::error( const QXmlParseException &exception )
+{
+	emit( parsingError( exception.message() ) );
+	qDebug() << "Parsing error: " << exception.message();
+	return true;
+}
+
+bool Request::warning( const QXmlParseException &exception )
+{
+	qDebug() << "Parsing warning: " << exception.message();
+	return true;
+}
+
+
+bool Request::fatalError( const QXmlParseException &exception )
+{
+	emit( parsingError( exception.message() ) );
+	qDebug() << "Fatal parsing error: " << exception.message();
+	return true;
 }
 
 }

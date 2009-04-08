@@ -42,7 +42,6 @@ PostRequest *Browser::postBookmark( const QString &name,
 	const QString &description,
 	QList<QString> tags )
 {
-	qDebug() << name << url << description;
 	PostRequest *req = new PostRequest(
 		QUrl( "/v1/posts/add" ),
 		name,

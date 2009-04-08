@@ -8,4 +8,8 @@ lib
 moc*
 Makefile
 *_automoc*
+CTestTestfile.cmake
+cmake_install.cmake
+cmake_uninstall.cmake
+*_automoc.cpp
 

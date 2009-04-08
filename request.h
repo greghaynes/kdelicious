@@ -19,11 +19,6 @@ class Request
 	Q_OBJECT
 
 	public:
-		enum ResponseType
-		{
-			Bookmark = 128
-		};
-
 		Request( const QUrl &path,
 			QObject *parent = 0 );
 		virtual ~Request();
@@ -42,8 +37,13 @@ class Request
 		void run( QHttp *qhttp );
 		const QVariant &responseData() const;
 
+		bool error( const QXmlParseException &exception );
+		bool warning( const QXmlParseException &exception );
+		bool fatalError( const QXmlParseException &exception );
+
 	Q_SIGNALS:
 		void finished();
+		void parsingError( QString message );
 
 	protected:
 		QVariant data;

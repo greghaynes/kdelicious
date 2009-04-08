@@ -29,8 +29,9 @@ class KDeliciousPlugin
 			quint16 port,
 			QAuthenticator *authenticator );
 		void tagPage();
-		void requestStarted( int id );
 		void requestFinished( int id, bool error );
+		void responseHeaderReceived( const QHttpResponseHeader &header );
+		void postFailed( QtLicious::PostRequest::Error error );
 
 	private:
 		KHTMLPart *m_parent;

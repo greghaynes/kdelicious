@@ -12,9 +12,11 @@
 #include <KConfig>
 #include <KAboutData>
 #include <KHTMLPart>
+#include <KMessageBox>
 #include <DOM/HTMLDocument>
 
 #include <QAuthenticator>
+#include <QHttpResponseHeader>
 
 static const KAboutData aboutData("kdelicious", 0, ki18n("del.icio.us plugin"), "1.0");
 K_PLUGIN_FACTORY( KDeliciousPluginFactory, registerPlugin< KDeliciousPlugin >(); )
@@ -51,10 +53,10 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	m_browser->http()->ignoreSslErrors();
 	connect( m_browser->http(), SIGNAL(authenticationRequired(QString,quint16,QAuthenticator*)),
 		this, SLOT(authenticationRequired(QString,quint16,QAuthenticator*)) );
-	connect( m_browser->http(), SIGNAL(requestStarted(int)),
-		this, SLOT(requestStarted(int)) );
 	connect( m_browser->http(), SIGNAL(requestFinished(int,bool)),
 		this, SLOT(requestFinished(int,bool)) );
+	connect( m_browser->http(), SIGNAL(responseHeaderReceived(QHttpResponseHeader)),
+		this, SLOT(responseHeaderReceived(QHttpResponseHeader)) );
 
 }
 
@@ -91,24 +93,38 @@ void KDeliciousPlugin::authenticationRequired( QString hostname,
 void KDeliciousPlugin::tagPage()
 {
 	CreateBookmarkDialog dialog( 0 );
+	QtLicious::PostRequest *request;
 	dialog.setTitle( m_parent->htmlDocument().title().string() );
 	dialog.setUrl( m_parent->url().url() );
 	QList<QString> list;
 	if( dialog.exec() )
 	{
-		m_browser->postBookmark( dialog.getTitle(),
+		request = m_browser->postBookmark( dialog.getTitle(),
 			dialog.getUrl(),
 			dialog.getDescription(),
 			list );
+		connect( request, SIGNAL(failed(QtLicious::PostRequest::Error)),
+			this, SLOT(postFailed(QtLicious::PostRequest::Error)) );
 	}
-}
-
-void KDeliciousPlugin::requestStarted( int id )
-{
-	qDebug() << "Request started";
 }
 
 void KDeliciousPlugin::requestFinished( int id, bool error )
 {
-	qDebug() << "Request finished.  Error" << m_browser->http()->errorString();
+	if( error )
+	{
+		KMessageBox::error( 0, i18n( "Request error!" ), i18n( "Request Error" )  );
+	}
+}
+
+void KDeliciousPlugin::responseHeaderReceived( const QHttpResponseHeader &header )
+{
+	if( header.statusCode() != 200 )
+	{
+		kDebug() << "Non 200 response code: " << header.reasonPhrase();
+	}
+}
+
+void KDeliciousPlugin::postFailed( QtLicious::PostRequest::Error error )
+{
+	KMessageBox::error( 0, i18n( "Post failed." ), i18n( "Post failed." ) );
 }
