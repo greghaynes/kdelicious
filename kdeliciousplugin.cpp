@@ -50,6 +50,7 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 
 	connect( m_browser->http(), SIGNAL(authenticationRequired(QString,quint16,QAuthenticator*)),
 		this, SLOT(authenticationRequired(QString,quint16,QAuthenticator*)) );
+	
 
 }
 

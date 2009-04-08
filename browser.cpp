@@ -30,7 +30,7 @@ QHttp *Browser::http() const
 BookmarkRequest *Browser::recentBookmarks()
 {
 	BookmarkRequest *req = new BookmarkRequest(
-		"v1/posts/recent?",
+		QUrl( "/v1/posts/recent" ),
 		this );
 	enqueueRequest( req );
 	return req;
@@ -42,7 +42,13 @@ PostRequest *Browser::postBookmark( const QString &name,
 	QList<QString> tags )
 {
 	qDebug() << name << url << description;
-	PostRequest *req = new PostRequest( "v1/posts/add?", name, url, description, tags, this );
+	PostRequest *req = new PostRequest(
+		QUrl( "https://api.del.icio.us/v1/posts/add" ),
+		name,
+	   	url,
+		description,
+		tags,
+		this );
 	enqueueRequest( req );
 	return req;
 }

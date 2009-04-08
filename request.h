@@ -24,12 +24,12 @@ class Request
 			Bookmark = 128
 		};
 
-		Request( const QString &path,
+		Request( const QUrl &path,
 			QObject *parent = 0 );
 		virtual ~Request();
 
-		const QString &path() const;
-		void setPath( const QString &path );
+		const QUrl &path() const;
+		void setPath( const QUrl &path );
 		bool isFinished() const;
 
 		/**
@@ -52,7 +52,7 @@ class Request
 		void slotReadyRead();
 
 	private:
-		QString m_path;
+		QUrl m_path;
 		QBuffer *buffer;
 		bool m_isFinished;
 

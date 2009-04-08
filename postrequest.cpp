@@ -3,7 +3,7 @@
 namespace QtLicious
 {
 
-PostRequest::PostRequest( const QString &path,
+PostRequest::PostRequest( const QUrl &path,
 	const QString &name,
 	const QString &url,
 	const QString &description,
@@ -11,19 +11,21 @@ PostRequest::PostRequest( const QString &path,
 	QObject *parent )
 	: Request( path, parent )
 {
-	QString fullpath;
-	fullpath.append( path );
-	fullpath.append( "&url=" );
-	fullpath.append( url );
-	fullpath.append( "&description=" );
-	fullpath.append( name );
-	QString tag;
+	QUrl newPath;
+	QList<QPair<QString, QString> > arglist;
+	arglist.append( QPair<QString, QString>( "url", url ) );
+	arglist.append( QPair<QString, QString>( "description", name ) );
+	arglist.append( QPair<QString, QString>( "notes", description ) );
+	QString tag, tagarg;
 	if( tags.size() > 0 )
 	{
 		foreach( tag, tags )
-			fullpath += tag + " ";
+			tagarg.append( tag + " " );
 	}
-	setPath( fullpath );
+	arglist.append( QPair<QString, QString>( "tag", tagarg ) );
+	newPath.setPath( path.toString() );
+	newPath.setQueryItems( arglist );
+	setPath( newPath );
 }
 
 }

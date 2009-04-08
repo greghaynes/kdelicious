@@ -5,7 +5,7 @@
 namespace QtLicious
 {
 
-BookmarkRequest::BookmarkRequest( const QString &path,
+BookmarkRequest::BookmarkRequest( const QUrl &path,
 	QObject *parent )
 	: Request( path, parent )
 {

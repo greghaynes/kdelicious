@@ -11,7 +11,7 @@ class PostRequest
 {
 
 	public:
-		PostRequest( const QString &path,
+		PostRequest( const QUrl &path,
 			const QString &name,
 			const QString &url,
 			const QString &description,

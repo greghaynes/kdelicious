@@ -13,7 +13,7 @@ class BookmarkRequest
 {
 
 	public:
-		BookmarkRequest( const QString &path,
+		BookmarkRequest( const QUrl &path,
 			QObject *parent = 0 );
 
 		bool startDocument();
