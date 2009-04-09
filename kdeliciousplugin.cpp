@@ -3,13 +3,10 @@
 
 #include <kgenericfactory.h>
 #include <kparts/part.h>
-#include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KAction>
 #include <KPasswordDialog>
-#include <KWallet/Wallet>
-#include <KConfig>
 #include <KAboutData>
 #include <KHTMLPart>
 #include <KMessageBox>

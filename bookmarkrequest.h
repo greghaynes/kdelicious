@@ -3,7 +3,6 @@
 
 #include "request.h"
 
-#include <QString>
 
 namespace QtLicious
 {

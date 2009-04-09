@@ -1,8 +1,6 @@
 #include "postrequest.h"
 
-#include <QDebug>
 #include <QXmlAttributes>
-#include <QXmlParseException>
 
 namespace QtLicious
 {

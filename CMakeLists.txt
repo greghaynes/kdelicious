@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 find_package(KDE4 REQUIRED)
 
 include(KDE4Defaults)
+add_definitions( -DQT_STRICT_ITERATORS)
 include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${KDE4_KHTML_INCLUDES})
  
 set(kdelicious_SRCS

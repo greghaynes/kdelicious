@@ -8,7 +8,6 @@
 #include <QObject>
 #include <QString>
 #include <QQueue>
-#include <QUrl>
 
 static const char *delicious_api_host = "api.del.icio.us";
 

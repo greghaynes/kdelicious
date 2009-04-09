@@ -5,7 +5,6 @@
 
 #include <kparts/plugin.h>
 
-class KActionMenu;
 class KConfig;
 class KHTMLPart;
 

@@ -1,6 +1,5 @@
 #include "createbookmarkdialog.h"
 
-#include <KLocalizedString>
 
 #include "ui_newbookmarkwidget.h"
 
