@@ -1,5 +1,7 @@
 #include "createbookmarkdialog.h"
 
+#include <KLocalizedString>
+
 #include "ui_newbookmarkwidget.h"
 
 CreateBookmarkDialog::CreateBookmarkDialog( QWidget *parent )
@@ -9,6 +11,7 @@ CreateBookmarkDialog::CreateBookmarkDialog( QWidget *parent )
 	QWidget *mainWidget = new QWidget( this );
 	ui->setupUi( mainWidget );
 	setMainWidget( mainWidget );
+	setWindowTitle( i18n("Save del.icio.us Bookmark") );
 	resize( 500, 300 );
 }
 

@@ -37,9 +37,9 @@ class Browser
 
 		QHttp *http() const;
 		BookmarkRequest *recentBookmarks();
-		PostRequest *postBookmark( const QString &name,
+		PostRequest *postBookmark( const QString &description,
 			const QString &url,
-			const QString &description,
+			const QString &notes,
 			QList<QString> tags );
 
 	private Q_SLOTS:

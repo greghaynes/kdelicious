@@ -43,8 +43,8 @@ bool Request::isFinished() const
 
 void Request::run( QHttp *qhttp )
 {
-	qDebug() << "Running" << path().toEncoded();
-	qhttp->get( path().encodedPath(), buffer );
+	qDebug() << "Run request " << path().toEncoded();
+	qhttp->get( path().toEncoded(), buffer );
 }
 
 const QVariant &Request::responseData() const
@@ -61,14 +61,14 @@ void Request::slotReadyRead()
 	reader.setErrorHandler( this );
 	if( !reader.parse( source ) )
 		qDebug() << "Parsing failed.";
-	emit( finished() );
+	emitFinished();
 }
 
 bool Request::error( const QXmlParseException &exception )
 {
 	emit( parsingError( exception.message() ) );
-	qDebug() << "Parsing error: " << exception.message();
-	return true;
+	emitFinished();
+	return false;
 }
 
 bool Request::warning( const QXmlParseException &exception )
@@ -81,8 +81,13 @@ bool Request::warning( const QXmlParseException &exception )
 bool Request::fatalError( const QXmlParseException &exception )
 {
 	emit( parsingError( exception.message() ) );
-	qDebug() << "Fatal parsing error: " << exception.message();
-	return true;
+	emitFinished();
+	return false;
+}
+
+void Request::emitFinished()
+{
+	emit( finished() );
 }
 
 }

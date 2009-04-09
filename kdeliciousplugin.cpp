@@ -102,9 +102,11 @@ void KDeliciousPlugin::tagPage()
 		request = m_browser->postBookmark( dialog.getTitle(),
 			dialog.getUrl(),
 			dialog.getDescription(),
-			list );
+			dialog.getTags().split( ' ' ) );
 		connect( request, SIGNAL(failed(QtLicious::PostRequest::Error)),
 			this, SLOT(postFailed(QtLicious::PostRequest::Error)) );
+		connect( request, SIGNAL(finished()),
+			request, SLOT(deleteLater()) );
 	}
 }
 
@@ -118,10 +120,7 @@ void KDeliciousPlugin::requestFinished( int id, bool error )
 
 void KDeliciousPlugin::responseHeaderReceived( const QHttpResponseHeader &header )
 {
-	if( header.statusCode() != 200 )
-	{
-		kDebug() << "Non 200 response code: " << header.reasonPhrase();
-	}
+	kDebug() << "Response code: " << header.reasonPhrase();
 }
 
 void KDeliciousPlugin::postFailed( QtLicious::PostRequest::Error error )

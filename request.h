@@ -46,6 +46,8 @@ class Request
 		void parsingError( QString message );
 
 	protected:
+		void emitFinished();
+
 		QVariant data;
 
 	private Q_SLOTS:

@@ -14,13 +14,13 @@ class PostRequest
 	public:
 		enum Error
 		{
-			SomethingWentWrong // This defined by the API
+			SomethingWentWrong // This defined by the del.icio.us API
 		};
 
 		PostRequest( const QUrl &path,
-			const QString &name,
-			const QString &url,
 			const QString &description,
+			const QString &url,
+			const QString &notes,
 			QList<QString> tags,
 			QObject *parent = 0 );
 
