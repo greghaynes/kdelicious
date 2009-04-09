@@ -26,6 +26,7 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	: KParts::Plugin(parent)
 	, m_browser( new QtLicious::Browser( this ) )
 {
+	Q_UNUSED(args)
 	setComponentData( KDeliciousPluginFactory::componentData() );
 
 	if( parent )
@@ -58,6 +59,7 @@ void KDeliciousPlugin::authenticationRequired( QString hostname,
 	quint16 port,
 	QAuthenticator *authenticator )
 {
+	Q_UNUSED(port)
 	KPasswordDialog dialog( 0,
 		KPasswordDialog::ShowUsernameLine );
 	dialog.setPrompt( "Authentication required for " + hostname );
@@ -92,6 +94,7 @@ void KDeliciousPlugin::tagPage()
 
 void KDeliciousPlugin::requestFinished( int id, bool error )
 {
+	Q_UNUSED(id)
 	if( error )
 	{
 		KMessageBox::error( 0, i18n( "Request error!" ), i18n( "Request Error" )  );
@@ -105,5 +108,6 @@ void KDeliciousPlugin::responseHeaderReceived( const QHttpResponseHeader &header
 
 void KDeliciousPlugin::postFailed( QtLicious::PostRequest::Error error )
 {
+	Q_UNUSED(error)
 	KMessageBox::error( 0, i18n( "Post failed." ), i18n( "Post failed." ) );
 }

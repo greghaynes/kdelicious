@@ -44,6 +44,8 @@ bool PostRequest::startElement( const QString &namespaceURI,
 	const QString &qName,
 	const QXmlAttributes &attr )
 {
+	Q_UNUSED(namespaceURI);
+	Q_UNUSED(qName)
 	if( localName == "result" && attr.value( "code" ) == "something went wrong" )
 	{
 		emit( failed( SomethingWentWrong ) );
