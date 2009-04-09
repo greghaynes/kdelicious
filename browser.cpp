@@ -40,15 +40,14 @@ BookmarkRequest *Browser::recentBookmarks()
 PostRequest *Browser::postBookmark( const QString &name,
 	const QString &url,
 	const QString &description,
-	QList<QString> tags )
+	QList<QString> tags,
+	bool shared,
+	bool replace )
 {
 	PostRequest *req = new PostRequest(
 		QUrl( "/v1/posts/add" ),
-		name,
-	   	url,
-		description,
-		tags,
-		this );
+		name, url, description,
+		tags, shared, replace, this );
 	enqueueRequest( req );
 	return req;
 }

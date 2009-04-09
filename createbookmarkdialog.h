@@ -21,6 +21,8 @@ class CreateBookmarkDialog
 		QString getTitle() const;
 		QString getDescription() const;
 		QString getTags() const;
+		bool replace() const;
+		bool shared() const;
 
 	private:
 

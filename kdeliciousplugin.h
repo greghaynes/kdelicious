@@ -23,8 +23,6 @@ class KDeliciousPlugin
 		KDeliciousPlugin(QObject* parent = 0, const QVariantList &args = QVariantList());
 
 	private Q_SLOTS:
-		void setAccount( const QString &prompt );
-		void setAccount();
 		void authenticationRequired( QString hostname,
 			quint16 port,
 			QAuthenticator *authenticator );

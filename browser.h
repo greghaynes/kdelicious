@@ -40,7 +40,9 @@ class Browser
 		PostRequest *postBookmark( const QString &description,
 			const QString &url,
 			const QString &notes,
-			QList<QString> tags );
+			QList<QString> tags,
+			bool shared = true,
+			bool replace = true );
 
 	private Q_SLOTS:
 		void requestFinished();

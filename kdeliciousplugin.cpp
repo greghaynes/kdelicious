@@ -31,7 +31,7 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	if( parent )
 		m_parent = dynamic_cast<KHTMLPart*>(parent);
 
-	KActionMenu *menu = new KActionMenu( KIcon("bookmarks-organize.png"), i18n("del.icio.us Settings"),
+	KActionMenu *menu = new KActionMenu( KIcon("bookmarks-organize.png"), i18n("del.icio.us Plugin"),
 		actionCollection() );
 	actionCollection()->addAction( "kdelicious menu", menu );
 	menu->setDelayed( false );
@@ -39,16 +39,10 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	KAction *kaction;
 	kaction = actionCollection()->addAction( "delicioustag" );
 	kaction->setIcon( KIcon("bookmarks-organize.png") );
-	kaction->setText( i18n("&Tag this site...") );
+	kaction->setText( i18n("Save Bookmark...") );
 	menu->addAction( kaction );
 	connect( kaction, SIGNAL(triggered(bool)),
 		this, SLOT(tagPage()) );
-
-	kaction = actionCollection()->addAction( "deliciousaccount" );
-	kaction->setText( i18n( "&Account" ) );
-	menu->addAction( kaction );
-	connect( kaction, SIGNAL(triggered(bool)),
-		this, SLOT(setAccount()) );
 
 	m_browser->http()->ignoreSslErrors();
 	connect( m_browser->http(), SIGNAL(authenticationRequired(QString,quint16,QAuthenticator*)),
@@ -58,22 +52,6 @@ KDeliciousPlugin::KDeliciousPlugin(QObject *parent, const QVariantList &args)
 	connect( m_browser->http(), SIGNAL(responseHeaderReceived(QHttpResponseHeader)),
 		this, SLOT(responseHeaderReceived(QHttpResponseHeader)) );
 
-}
-
-void KDeliciousPlugin::setAccount( const QString &prompt )
-{
-	KPasswordDialog dialog( 0,
-		KPasswordDialog::ShowUsernameLine );
-	dialog.setPrompt( prompt );
-	if( dialog.exec() )
-	{
-		m_browser->http()->setUser( dialog.username(), dialog.password() );
-	}
-}
-
-void KDeliciousPlugin::setAccount()
-{
-	setAccount( i18n("Enter your del.icio.us account information.") );
 }
 
 void KDeliciousPlugin::authenticationRequired( QString hostname,
@@ -102,7 +80,9 @@ void KDeliciousPlugin::tagPage()
 		request = m_browser->postBookmark( dialog.getTitle(),
 			dialog.getUrl(),
 			dialog.getDescription(),
-			dialog.getTags().split( ' ' ) );
+			dialog.getTags().split( ' ', QString::SkipEmptyParts ),
+			dialog.shared(),
+			dialog.replace() );
 		connect( request, SIGNAL(failed(QtLicious::PostRequest::Error)),
 			this, SLOT(postFailed(QtLicious::PostRequest::Error)) );
 		connect( request, SIGNAL(finished()),

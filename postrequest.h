@@ -22,6 +22,8 @@ class PostRequest
 			const QString &url,
 			const QString &notes,
 			QList<QString> tags,
+			bool shared,
+			bool replace,
 			QObject *parent = 0 );
 
 		bool startElement( const QString &namespaceURI,
