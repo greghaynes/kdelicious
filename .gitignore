@@ -12,4 +12,5 @@ CTestTestfile.cmake
 cmake_install.cmake
 cmake_uninstall.cmake
 *_automoc.cpp
+install_manifest.txt
 
